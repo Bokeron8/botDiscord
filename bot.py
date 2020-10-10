@@ -36,6 +36,8 @@ async def on_message(message):
     if message.content == '!Frias':
         response = random.choice(friasAns)
         await message.channel.send(response)
-
+    #Dm    
+    elif message.content == '!Msg':
+        await message.author.send("Lagrima y sudor")
 
 client.run(TOKEN)
