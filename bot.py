@@ -3,7 +3,7 @@ import os
 import discord
 import random
 
-TOKEN = "NzY0NTcwMDI1MzA2NjE5OTI1.X4ILUw.IRm-8tllAgkvLOCUaykg7M3m8Z4"
+TOKEN = "token"
 SERVER = "Smote"
 
 client = discord.Client()
