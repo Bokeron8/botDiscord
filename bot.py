@@ -1,43 +1,38 @@
 import os
-
 import discord
 import random
-
+import asyncio
+from discord.ext import commands
+from animeBot import animeInf
 TOKEN = "token"
 SERVER = "Smote"
 
-client = discord.Client()
+client = commands.Bot(command_prefix="!")
 #Bot connect
 @client.event
 async def on_ready():
-    server = discord.utils.get(client.guilds, name=SERVER)
-    print(
-        f'{client.user} has connected to Discord!\n'
-        f'{server.name}(id: {server.id})'
-    )
-#Join command?
-@client.event
-async def on_member_join(member):
-    await member.create_dm()
-    await member.dm_channel.send(
-        f'Hi {member.name}, welcome to my Discord server!'
-    )
-#Frias command
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+    print("Ready")
 
+#anime info
+@client.command()
+async def inf(ctx, *, title):
+    info = animeInf(title)
+    await ctx.send(info)
+
+#Frias command
+@client.command()
+async def Frias(ctx):
     friasAns = [
         'Frias es re puto',
         'Frias se la traga'
     ]
+    
+    response = random.choice(friasAns)
+    await ctx.send(response)
 
-    if message.content == '!Frias':
-        response = random.choice(friasAns)
-        await message.channel.send(response)
-    #Dm    
-    elif message.content == '!Msg':
-        await message.author.send("Lagrima y sudor")
+#Dm command
+@client.command()
+async def msg(ctx):
+    await ctx.author.send(f"Re puto {ctx.author}")
 
 client.run(TOKEN)
